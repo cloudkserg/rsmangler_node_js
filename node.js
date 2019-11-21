@@ -8,7 +8,7 @@ const main = async () => {
 			    return indexes;
 		}
 
-	const filename = './wordlists/rockyou.txt'
+	const filename = '../wordlists/rockyou.txt'
 	var lineReader = require('readline').createInterface({
 		  input: require('fs').createReadStream(filename)
 	});
