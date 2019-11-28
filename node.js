@@ -10,7 +10,16 @@ const main = async () => {
 				        }
 			    return indexes;
 		}
+		//функция для добавления только таких линий в массив, которых там еще нет
+	function addLines(lines, line) {
+		if (lines.indexOf(line) == -1) 
+			lines.push(line);
+		return lines;
+	}
 
+	/*------------------------------------------------------------*/
+	/*-----------НАЧАЛО РАБОТЫ-------------------*/
+	/*------------------------------------------------------------*/
 	//словарь, который переделываем
 	const filename = '../wordlists/rockyou.txt'
 	//создаем программу для считывания по линиям словаря образца
@@ -18,32 +27,12 @@ const main = async () => {
 		  input: require('fs').createReadStream(filename)
 	});
 	
-	//функция для добавления только таких линий в массив, которых там еще нет
-	function addLines(lines, line) {
-		if (lines.indexOf(line) == -1) 
-			lines.push(line);
-		return lines;
-	}
-	//индекс строки, для  подсчета времени выполнения
-	let id = 0;
-	//засекаем время начала
-	let time = +new Date().getTime();
-	//функция которая выводит на экран время выполнения с предыдущей остановки
-	function lTime() {
-		const newTime = +new Date().getTime();
-		console.error('ss:' + (newTime - time));
-		time = newTime;
-	}
+
 	//считываем файл по линиям
 	lineReader.on('line', function (line) {
 		//заносим строку образец в массив для нового словаря
 		let lines = [line];
-		//Каждый 100 000 обработанных строк из словаря образца логируем время, чтобы видеть, что работа идет
-		if (id % 100000 == 0) {
-			lTime();
-			console.error(id);
-		}
-		id++;
+
 
 		//добавляем в массив для нового словаря строку образец с первой большой буквой
 		const newLine1 = line.charAt(0).toUpperCase() + line.slice(1);
