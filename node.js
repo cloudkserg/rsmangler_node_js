@@ -18,7 +18,7 @@ const main = async () => {
 		  input: require('fs').createReadStream(filename)
 	});
 	
-	//функция для добавления только таких линий в файл, которых там еще нет
+	//функция для добавления только таких линий в массив, которых там еще нет
 	function addLines(lines, line) {
 		if (lines.indexOf(line) == -1) 
 			lines.push(line);
